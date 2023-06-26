@@ -22,6 +22,7 @@ Or
 `flask run`
 
 
+
 # Admin DB 
 Ref. https://flask-migrate.readthedocs.io/en/latest/
 ## Create a initial migration repository
@@ -36,3 +37,21 @@ Ref. https://flask-migrate.readthedocs.io/en/latest/
 ## After updating the model
 `flask db upgrade`
 
+
+<!-- alternativo -->
+
+## install poetry windows
+`poetry` 
+
+## clone repo
+`git clone https://github.com/seunb/rottenpotatoes`
+
+## power shell
+`poetry install` 
+`poetry shell`
+
+## inside enfiroment
+`$env:FLASK_APP = "app.webapp"`
+`flask db upgrade`
+`flask seed movies`
+`flask seed users`
