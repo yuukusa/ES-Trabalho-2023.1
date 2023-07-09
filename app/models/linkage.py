@@ -20,6 +20,7 @@ class Linkage(db.Model):
     school = db.relationship("School", backref="linkage", foreign_keys=[school_id])
     #professor_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     #professor = db.relationship("User", backref="linkage", lazy=True, foreign_keys=[professor_id])
+    presence = db.Column(db.Boolean)
        
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)

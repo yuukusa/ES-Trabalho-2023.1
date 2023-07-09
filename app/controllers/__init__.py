@@ -7,4 +7,4 @@ def blueprints():
     from .solicitations_controllers import bp as solicitations_bp
     
 
-    return [main_bp, users_bp, movies_bp]
+    return [main_bp, users_bp, movies_bp, schools_bp, linkages_bp, solicitations_bp]

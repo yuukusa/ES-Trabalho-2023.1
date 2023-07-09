@@ -37,3 +37,28 @@ movies = [
     {"title": "O Vingador", "rating": "NAO SEI", "release_date": _d("17-Apr-2019")},
     
 ]
+
+
+schools = [
+    {
+        "title": "CEF 5 Brasília", "release_date": _d("23-May-2023") 
+    },
+    
+    {
+        "title": "CEM Setor Leste", "release_date": _d("25-May-2023") 
+    },
+    
+    {
+        "title": "CEM Setor Oeste", "release_date": _d("25-May-2023")
+    }
+    ]
+
+linkages = [
+    
+    { 'title': 'test', 'school_id': 1, 'student_id':1, 'presence': True},
+    
+    { 'title': 'test', 'school_id': 2, 'student_id':2, 'presence': True},
+    
+    ]
+
+solicitations = []

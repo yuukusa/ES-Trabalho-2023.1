@@ -9,12 +9,12 @@ class School(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     #rating = db.Column(db.String)
-    description = db.Column(db.String)
+    description = db.Column(db.String, nullable=True)
     #professor= db.Column(db.String, db.ForeignKey("user.id"), nullable=False)
     #professor = db.relationship("User", backref="school", lazy=True)
     
     
-    #release_date = db.Column(db.DateTime)
+    release_date = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(
         db.DateTime, nullable=False, default=func.now(), onupdate=func.now()

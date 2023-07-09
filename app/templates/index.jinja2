@@ -24,27 +24,31 @@
     </h2>
 
     {% if not current_user.is_student %}
-    <h4><!--
-essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
-            e outras funcionalidades
 
-        <a href="{#{ url_for('schools.new') }#}">Registrar Exame</a>
-    </h4>
+  <p>
+    essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
+            e outras funcionalidades
+        </p>
+
+        <h4>
+            <a href="{{ url_for('schools.new') }}">Registrar Exame</a>
+        </h4>
+        
     <h4>
-        <a href="{#{ url_for('linkages.new') }#}">Gravar vínculo</a>
+        <a href="{{ url_for('linkages.new') }}">Gravar vínculo</a>
     </h4>
     <h4>
             
         
-        <a href="{#{ url_for('solicitations.new') }#}">Aplique para uma escola de seu interesse</a>
+        <a href="{{ url_for('solicitations.new') }}">Aplique para uma escola de seu interesse</a>
     </h4>
     {% endif %}
     {%if not current_user.is_authenticated %}
     <h4>
-        <a href="{#{ url_for('schools.index') }#}">Escolas</a>
+        <a href="{{ url_for('schools.index') }}">Escolas</a>
     </h4>
     {%endif%}
-    -->
+    
     {% endblock %}
 
     {% block scripts %}
