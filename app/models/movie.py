@@ -14,6 +14,7 @@ class Movie(db.Model):
     updated_at = db.Column(
         db.DateTime, nullable=False, default=func.now(), onupdate=func.now()
     )
+    
 
     def __repr__(self):
         return "<Movie %r>" % self.id

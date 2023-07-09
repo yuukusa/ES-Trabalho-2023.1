@@ -33,14 +33,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {{ render_nav_item('main.index', 'Home') }}
-                    {# {{ render_nav_item('movies.index', 'Movies') }}  #}
+                    {{ render_nav_item('movies.index', 'Movies') }}
+                    
                     {% if current_user.is_authenticated %}
                     {{ render_nav_item('users.index', 'Users' ) }}
                     {{render_nav_item('movies.index', 'Movies') }}
-                    {{ render_nav_item('auth.profile', current_user.username ) }}
+
+                    {#{ render_nav_item('schools.index', 'Escolas') }#}
+                    {#{ render_nav_item('linkages.index', 'Vínculos') }#}
+
+                    {{ render_nav_item('auth.profile', current_user.username|upper ) }}
                     {{ render_nav_item('auth.logout', 'Logout') }}
+                    
+                    {% elif current_user.is_student==False %} <!--{#admin#}-->
+                    {{ render_nav_item ('auth.upload', 'Docs') }}
+                    
+                    
                     {% else %}
                     {{ render_nav_item('auth.login', 'Login') }}
+                    {{ render_nav_item('auth.register', 'Register') }}
                     {% endif %}
                 </ul>
             </div>
@@ -56,7 +67,7 @@
         {% block footer %}
         <small> &copy; 2023–
             <script>document.write(new Date().getFullYear())</script> <a
-                href="https://github.com/gabrielsr">gabrielsr</a>
+                href="https://github.com/">Eng SW 2023.1</a>
         </small>
         {% endblock %}
     </footer>

@@ -1,5 +1,5 @@
 #.flaskenv
-#FLASK_APP=app.webapp
+FLASK_APP=app.webapp
 FLASK_DEBUG=1
 FLASK_RUN_PORT=5000
 SQLALCHEMY_ECHO=1

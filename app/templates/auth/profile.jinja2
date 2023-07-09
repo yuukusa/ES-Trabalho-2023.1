@@ -8,4 +8,21 @@
 {% block content %}
 {{ current_user }}
 
+<h1>Olá, {{ current_user.username}}! Esse é seu perfil</h1>
+
+<div class="mb-3">
+        {% if current_user.is_student==False %}
+Logado com privilégios de Administrador, lembre-se de que com grandes poderes vem grandes responsabilidades!            
+	{% endif %}
+        {% if current_user.is_student!=False %}
+Bem vindo estudante, faça uma boa prova!
+	{% endif %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
 {% endblock %}

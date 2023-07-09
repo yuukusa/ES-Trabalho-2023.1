@@ -1,7 +1,14 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, PasswordField, FileField, TextAreaField, HiddenField, RadioField, SelectMultipleField, fields
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired
+from flask_login import current_user
+import wtforms
+from flask_wtf.file import FileField, FileRequired
+from werkzeug.utils import secure_filename
+
+
+
 
 from ..models import User
 
@@ -43,7 +50,10 @@ def index():
 
 
 class EditForm(FlaskForm):
-    username = StringField("Username", validators=[InputRequired()])
+    name = StringField("Nome", validators=[InputRequired()])
+    username = StringField(u"Nome de usuário", validators=[InputRequired()])
+    is_student = BooleanField("É estudante?", default="checked")
+    
     submit = SubmitField("Submit")
 
 
@@ -55,6 +65,7 @@ def edit(id):
     """
     user = db.get_or_404(User, id)
     userform = EditForm(formdata=request.form, obj=user)
+    
 
     form = EditForm(obj=user)
     if form.validate_on_submit():

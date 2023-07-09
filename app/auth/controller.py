@@ -1,4 +1,5 @@
-from flask import render_template, redirect, flash, url_for, session
+from flask import render_template, redirect, flash, url_for, session, request
+
 
 from datetime import timedelta
 from sqlalchemy.exc import (
@@ -25,6 +26,12 @@ from .forms import login_form, register_form
 
 
 from . import bp
+
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired
+from werkzeug.utils import secure_filename
+
+from wtforms import StringField, SubmitField, SelectField, IntegerField
 
 
 @bp.route("/", methods=("GET", "POST"), strict_slashes=False)
@@ -111,3 +118,47 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for("auth.login"))
+
+
+
+# docs&Upload route/controllers ######################################################################
+
+properties = {                                          # TODO: finish this
+    "entity_name": "documento",
+    "collection_name": "documentos",
+    "list_fields": ["id", "student_id", "status", "title", "comments", "created_at", "updated_at"],
+}
+
+
+class PhotoForm(FlaskForm):
+    photo = FileField(validators=[FileRequired()])
+
+@bp.route('/docs/', methods=['GET', 'POST'], strict_slashes=False)      # TODO: fix renderization to upload docs
+def upload():
+    form = PhotoForm()
+    if request.method == 'POST' and 'photo' in request.files:
+        print('form validated', request.form.get('photos'))
+
+    if form.validate_on_submit():
+        f = form.photo.data
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(
+            app.instance_path, 'photo', filename
+        ))
+        submit = SubmitField('Upload')
+        return redirect(url_for('main'))
+
+    docs_sent = db.session.query(User).filter(User.id == 1).first()
+    
+    return render_template("users/docs.jinja2", form=form, **properties) #, entities=docs_sent) #, docs_sent=docs_sent) ???
+
+
+@bp.route("/test", methods=("GET", "POST"), strict_slashes=False)
+def test_():
+    """
+    Test page.
+    :return: test page.
+    """
+    print("url reachable: ok")
+    
+    return render_template("test_mfa.jinja2")

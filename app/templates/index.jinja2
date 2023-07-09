@@ -11,5 +11,45 @@
 {% block content %}
 <h1>Index</h1>
 <p class="important">
-    Welcome on my definitely not really impressive homepage.
+</p>   
+    <h1>
+        Seja Bem Vindo!!!
+        <img src="{{ url_for('static', filename='img/Logo_UnB.png') }}" alt="UnB" width="40" height="25">
+    </h1>
+
+    <h2>
+        Esse é o marcaAí:
+        <p>
+        Um Sistema para realização de provas</p>
+    </h2>
+
+    {% if not current_user.is_student %}
+    <h4><!--
+essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
+            e outras funcionalidades
+
+        <a href="{#{ url_for('schools.new') }#}">Registrar Exame</a>
+    </h4>
+    <h4>
+        <a href="{#{ url_for('linkages.new') }#}">Gravar vínculo</a>
+    </h4>
+    <h4>
+            
+        
+        <a href="{#{ url_for('solicitations.new') }#}">Aplique para uma escola de seu interesse</a>
+    </h4>
+    {% endif %}
+    {%if not current_user.is_authenticated %}
+    <h4>
+        <a href="{#{ url_for('schools.index') }#}">Escolas</a>
+    </h4>
+    {%endif%}
+    -->
     {% endblock %}
+
+    {% block scripts %}
+    {{ super() }}
+    <!-- The contents of myscript.js will be loaded inside the script tag -->
+    
+    {% endblock %}         
+    
