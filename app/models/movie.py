@@ -11,9 +11,7 @@ class Movie(db.Model):
     description = db.Column(db.String)
     release_date = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
-    updated_at = db.Column(
-        db.DateTime, nullable=False, default=func.now(), onupdate=func.now()
-    )
+    updated_at = db.Column(db.DateTime, nullable=False, default=func.now(), onupdate=func.now())
     
 
     def __repr__(self):
