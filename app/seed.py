@@ -14,6 +14,9 @@ pwd_hash = "$2b$12$QLpUyPzW8PF6Kidk/fMXM.AQQSCI7UK7OsUr4k.2qVAbPq7yPdrhy"
 users = [
     {"username": "admin", "email": "1@d.m", "pwd": pwd_hash},
     {"username": "admin2", "email": "2@d.m", "pwd": pwd_hash},
+    {"username": "ana", "email": "3@d.m", "pwd": pwd_hash},
+    {"username": "bob", "email": "3@d.m", "pwd": pwd_hash},
+    {"username": "carol", "email": "3@d.m", "pwd": pwd_hash},
 ]
 
 movies = [
@@ -32,4 +35,5 @@ movies = [
     },
     {"title": "Chicken Run", "rating": "G", "release_date": _d("21-Jun-2000")},
     {"title": "O Vingador", "rating": "NAO SEI", "release_date": _d("17-Apr-2019")},
+    
 ]
