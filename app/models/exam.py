@@ -9,10 +9,12 @@ class Exam(db.Model):
     __tablename__ = "exam"
 
     id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer)
+    punctuation = db.Column(db.Integer)
+    
     title = db.Column(db.String)
     comments = db.Column(db.String)
-    quantity = db.Column(db.Integer)
-    ponctuation = db.Column(db.Integer)
+    
     
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)

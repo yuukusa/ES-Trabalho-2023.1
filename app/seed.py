@@ -12,12 +12,33 @@ _d = parser.parse
 
 pwd_hash = "$2b$12$QLpUyPzW8PF6Kidk/fMXM.AQQSCI7UK7OsUr4k.2qVAbPq7yPdrhy"
 users = [
-    {"username": "admin", "email": "1@d.m", "pwd": pwd_hash},
-    {"username": "admin2", "email": "2@d.m", "pwd": pwd_hash},
-    {"username": "ana", "email": "3@d.m", "pwd": pwd_hash},
-    {"username": "bob", "email": "3@d.m", "pwd": pwd_hash},
-    {"username": "carol", "email": "3@d.m", "pwd": pwd_hash},
+    # {"username": "admin", "email": "1@d.m", "pwd": pwd_hash},
+    # {"username": "admin2", "email": "2@d.m", "pwd": pwd_hash},
+    {"username": "ana", "email": "ana@d.m", "pwd": pwd_hash},
+    {"username": "bob", "email": "bob@d.m", "pwd": pwd_hash},
+    {"username": "carol", "email": "carol@d.m", "pwd": pwd_hash},
+    {"username": "pedro", "email":" pedro@unb.br", "pwd": "asdfg", "is_student": False},
+    {"username": "ester", "email": "ester@unb.br", "pwd": "asdfg", "is_student": True},
+    
+    
 ]
+
+exams = [
+    {'quantity': 2, 'punctuation': 10},
+     
+]
+
+
+
+
+
+
+
+
+
+
+
+
 
 movies = [
     {"title": "Aladdin", "rating": "G", "release_date": _d("25-Nov-1992")},

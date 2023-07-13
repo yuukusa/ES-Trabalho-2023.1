@@ -9,12 +9,12 @@ class Question(db.Model):
     __tablename__ = "question"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String)
+    type_of = db.Column(db.String)
+    content = db.Column(db.String)
+    answer = db.Column(db.String)
+    
     comments = db.Column(db.String)
-    type_of = db.Column(db.Integer)
-    answer = db.Column(db.Integer)
-    
-    
+    title = db.Column(db.String)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(
         db.DateTime, nullable=False, default=func.now(), onupdate=func.now()

@@ -5,6 +5,7 @@ def blueprints():
     from .schools_controllers import bp as schools_bp
     from .linkages_controllers import bp as linkages_bp
     from .solicitations_controllers import bp as solicitations_bp
+    #from .exams_controllers import bp as exams_bp
     
 
     return [main_bp, users_bp, movies_bp, schools_bp, linkages_bp, solicitations_bp]
