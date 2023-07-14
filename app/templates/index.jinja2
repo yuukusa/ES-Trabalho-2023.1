@@ -9,24 +9,24 @@
 </style>
 {% endblock %}
 {% block content %}
-<h1>Index</h1>
+
 <p class="important">
 </p>   
     <h1>
-        Seja Bem Vindo!!!
+        Seja Bem Vindo(a), {{ current_user.name }}!!!
         <img src="{{ url_for('static', filename='img/Logo_UnB.png') }}" alt="UnB" width="40" height="25">
     </h1>
 
     <h2>
         Esse é o marcaAí:
         <p>
-        Um Sistema para realização de provas</p>
+        Sistema para realização de provas</p>
     </h2>
 
     {% if current_user.is_authenticated and not current_user.is_student %}
 
   <p>
-    essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
+    *essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
             e outras funcionalidades
         </p>
 
@@ -43,7 +43,7 @@
         <a href="{{ url_for('questions.new') }}">Adicionar questões</a>
     </h4>
     {% endif %}
-    {%if not current_user.is_authenticated %}
+    {%if current_user.is_authenticated %}
     <h4>
         <a href="{#{ url_for('exams.show') }#}">Provas disponíveis</a>
     </h4>
