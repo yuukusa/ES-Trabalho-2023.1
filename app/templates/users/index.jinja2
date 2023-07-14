@@ -27,6 +27,7 @@
                 {% for field in list_fields %}
                 <th>{{ field }}</th>
                 {% endfor %}
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -43,11 +44,13 @@
                     <td>{{ entity[field] }}</td>
                     {% endif %}
                 {% endfor %}
+
+                
                 <td>
-                    <a href="{{ url_for('users.edit', id=entity.id) }}" class="edit" data-toggle="tooltip"
+                    <a href="{{ url_for('users.edit', id=entity.id) }}" class="btn" data-toggle="tooltip"
                         data-placement="top" title="Tooltip on top"><i title="Edit"> {{
                             render_icon('pencil-square') }}</i></a>
-                    <a href="#" class="clickForActionToConfirm" entity-id="{{entity.id}}" data-bs-toggle="modal"
+                    <a href="#" class="btn  clickForActionToConfirm" entity-id="{{entity.id}}" data-bs-toggle="modal"
                         data-bs-target="#modalConfirm" data-entity-reference="{{entity.username}}"
                         data-action="{{url_for('users.delete', id=entity.id)}}" data-action-text="delete">
                         {{render_icon('x-circle') }}

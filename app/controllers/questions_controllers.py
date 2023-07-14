@@ -3,17 +3,17 @@ from wtforms import StringField, SubmitField
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired
 
-from ..models import Movie
+from ..models import Question
 
-bp_name = "movies"
+bp_name = "questions"
 
 bp = Blueprint(bp_name, __name__)
 from ..webapp import db
 
 properties = {
-    "entity_name": "movie",
-    "collection_name": "Movies",
-    "list_fields": ["title", "rating", "description"],
+    "entity_name": "question",
+    "collection_name": "questions",
+    "list_fields": ["id","title", "type_of", "answer", "alternatives", "updated_at"],
 }
 
 
@@ -42,15 +42,17 @@ def index():
     Index page.
     :return: The response.
     """
-    movies = Movie.query.all()
-    return render_template(_j.index, entities=movies, **properties)
+    questions = Question.query.all()
+    return render_template(_j.index, entities=questions, **properties)
 
 
 class EditForm(FlaskForm):
     title = StringField("title", validators=[InputRequired()])
     rating = StringField("rating")
     description = StringField("description")
+    release_date = StringField("release_date")
     submit = SubmitField("Submit")
+    
 
 
 @bp.route("/new", methods=["GET"])
@@ -71,12 +73,12 @@ def create():
     """
     form = EditForm(formdata=request.form)
     if form.validate_on_submit():
-        newmovie = Movie()
-        form.populate_obj(newmovie)
-        db.session.add(newmovie)
+        newquestion = Question()
+        form.populate_obj(newquestion)
+        db.session.add(newquestion)
         db.session.commit()
-        flash(f"'{ newmovie.title}' created")
-        return redirect(_to.show(id=newmovie.id))
+        flash(f"'{ newquestion.title}' created")
+        return redirect(_to.show(id=newquestion.id))
     else:
         flash("Error in form validation", "danger")
 
@@ -87,8 +89,8 @@ def show(id):
     Show page.
     :return: The response.
     """
-    movie = db.get_or_404(Movie, id)
-    return render_template(_j.show, entity=movie, **properties)
+    question = db.get_or_404(Question, id)
+    return render_template(_j.show, entity=question, **properties)
 
 
 @bp.route("/<int:id>/edit", methods=["GET"])
@@ -97,8 +99,8 @@ def edit(id):
     Edit page.
     :return: The response.
     """
-    movie = db.get_or_404(Movie, id)
-    userform = EditForm(formdata=request.form, obj=movie)
+    question = db.get_or_404(Question, id)
+    userform = EditForm(formdata=request.form, obj=question)
     return render_template(_j.edit, form=userform, **properties)
 
 
@@ -109,12 +111,12 @@ def update(id):
     Save Edited Entity
     :return: redirect to show entity
     """
-    movie = db.get_or_404(Movie, id)
-    form = EditForm(formdata=request.form, obj=movie)
+    question = db.get_or_404(Question, id)
+    form = EditForm(formdata=request.form, obj=question)
     if form.validate_on_submit():
-        form.populate_obj(movie)
+        form.populate_obj(question)
         db.session.commit()
-        flash(f"'{ movie.title}' updated")
+        flash(f"'{ question.title}' updated")
         return redirect(_to.show(id=id))
     else:
         flash("Error in form validation", "danger")
@@ -126,8 +128,8 @@ def destroy(id):
     Delete Entity
     :return: redirect to list
     """
-    movie = db.get_or_404(Movie, id)
-    db.session.delete(movie)
+    question = db.get_or_404(Question, id)
+    db.session.delete(question)
     db.session.commit()
-    flash(f"'{ movie.title}' deleted")
+    flash(f"'{ question.title}' deleted")
     return redirect(_to.index())

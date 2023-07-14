@@ -11,8 +11,11 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     comments = db.Column(db.String)
-    type_of = db.Column(db.Integer)
-    answer = db.Column(db.Integer)
+    type_of = db.Column(db.Integer) # 1 - Múltipla escolha, 2 - Verdadeiro ou falso, 3 - Numérica
+    alternatives = db.Column(db.String)
+    
+    answer = db.Column(db.Integer)  # 1 - alternative1, 2 - alternative2, 3 - alternative3, 4 - alternative4
+                                    # 1 - Verdadeiro, 2 - Falso
     
     
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
@@ -21,4 +24,4 @@ class Question(db.Model):
     )
 
     def __repr__(self):
-        return "<solicitation %r>" % self.id
+        return "<question %r>" % self.id

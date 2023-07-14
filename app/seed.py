@@ -10,55 +10,50 @@ from dateutil import parser
 
 _d = parser.parse
 
+
+questions = [
+    {
+        "title": "Qual a capital do Brasil?", "type_of": 1, "answer": "Brasília", "alternatives": '{"Sao Paulo", "Rio de Janeiro", "Brasilia", "Belo Horizonte"}', "answer": 3, "comments": "Comentário sobre a questão"
+    },
+             
+    {
+        "title":'Qual é a capital da França?',
+        "alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
+        "answer":2
+        },
+    
+    {
+        "title":'Qual é a capital da Alemanha?',
+        "alternatives":'{"a": "Berlim", "b": "Paris", "c": "Roma"}',
+        "answer":1
+        }
+    ]
+
+
+exams = [
+    {
+        "title": "Prova de Geografia", "quantity": 3, "punctuation": 10,  "comments": "Comentário sobre a prova"},
+    {
+        "title": "Prova de Matemática", "quantity": 3, "punctuation": 10,  "comments": "Comentário sobre a prova"},
+    {
+        "title": "Prova de História", "quantity": 3, "punctuation": 10,  "comments": "Comentário sobre a prova"}
+    
+    ]
+
+
+
 pwd_hash = "$2b$12$QLpUyPzW8PF6Kidk/fMXM.AQQSCI7UK7OsUr4k.2qVAbPq7yPdrhy"
 users = [
     {"username": "admin", "email": "1@d.m", "pwd": pwd_hash},
     {"username": "admin2", "email": "2@d.m", "pwd": pwd_hash},
+    
+    {"username": "ester", "email": "ester@unb.br", "senha": "asdfg", "is_student": True},
+    {"username": "pedro", "email": "pedro@unb.br", "senha": "asdfg", "is_student": False},
+    
     {"username": "ana", "email": "3@d.m", "pwd": pwd_hash},
-    {"username": "bob", "email": "3@d.m", "pwd": pwd_hash},
-    {"username": "carol", "email": "3@d.m", "pwd": pwd_hash},
-]
-
-movies = [
-    {"title": "Aladdin", "rating": "G", "release_date": _d("25-Nov-1992")},
-    {"title": "The Terminator", "rating": "R", "release_date": _d("26-Oct-1984")},
-    {"title": "When Harry Met Sally", "rating": "R", "release_date": _d("21-Jul-1989")},
-    {"title": "The Help", "rating": "PG-13", "release_date": _d("10-Aug-2011")},
-    {"title": "Chocolat", "rating": "PG-13", "release_date": _d("5-Jan-2001")},
-    {"title": "Amelie", "rating": "R", "release_date": _d("25-Apr-2001")},
-    {"title": "2001: A Space Odyssey", "rating": "G", "release_date": _d("6-Apr-1968")},
-    {"title": "The Incredibles", "rating": "PG", "release_date": _d("5-Nov-2004")},
-    {
-        "title": "Raiders of the Lost Ark",
-        "rating": "PG",
-        "release_date": _d("12-Jun-1981"),
-    },
-    {"title": "Chicken Run", "rating": "G", "release_date": _d("21-Jun-2000")},
-    {"title": "O Vingador", "rating": "NAO SEI", "release_date": _d("17-Apr-2019")},
-    
+    {"username": "bob", "email": "4@d.m", "pwd": pwd_hash},
+    {"username": "carol", "email": "5@d.m", "pwd": pwd_hash},
 ]
 
 
-schools = [
-    {
-        "title": "CEF 5 Brasília", "release_date": _d("23-May-2023") 
-    },
-    
-    {
-        "title": "CEM Setor Leste", "release_date": _d("25-May-2023") 
-    },
-    
-    {
-        "title": "CEM Setor Oeste", "release_date": _d("25-May-2023")
-    }
-    ]
 
-linkages = [
-    
-    { 'title': 'test', 'school_id': 1, 'student_id':1, 'presence': True},
-    
-    { 'title': 'test', 'school_id': 2, 'student_id':2, 'presence': True},
-    
-    ]
-
-solicitations = []

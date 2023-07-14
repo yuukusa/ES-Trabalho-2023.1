@@ -1,19 +1,19 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField, IntegerField, BooleanField, RadioField, TextAreaField, HiddenField, SelectMultipleField, fields, FileField 
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired
 
-from ..models import School, User
+from ..models import Exam
 
-bp_name = "schools"
+bp_name = "exams"
 
 bp = Blueprint(bp_name, __name__)
 from ..webapp import db
 
 properties = {
-    "entity_name": "school",
-    "collection_name": "Escolas",
-    "list_fields": ["id","title", "Professor", "rating", "updated_at"],
+    "entity_name": "exam",
+    "collection_name": "exams",
+    "list_fields": ["id","title", "qntityOfQuestions", "punctuation", "updated_at"],
 }
 
 
@@ -42,17 +42,21 @@ def index():
     Index page.
     :return: The response.
     """
-    schools = School.query.all()
-    return render_template(_j.index, entities=schools, **properties)
+    exams = Exam.query.all()
+    return render_template(_j.index, entities=exams, **properties)
 
 
 class EditForm(FlaskForm):
-    title = StringField("Nome", validators=[InputRequired()])
-    #rating = StringField("rating")
-    description = StringField("Descrição")
-    #release_date = StringField("release_date")
-    submit = SubmitField("Enviar")
-    
+    title = StringField("title", validators=[InputRequired()])
+    comments = StringField("description")
+    qntityOfQuestions = IntegerField("quantity")
+    punctuation = IntegerField("punctuation")
+    submit = SubmitField("Submit")
+
+class SearchForm(FlaskForm):
+    title = StringField("title", validators=[InputRequired()])
+    submit = SubmitField("Submit")
+ 
 
 
 @bp.route("/new", methods=["GET"])
@@ -73,12 +77,12 @@ def create():
     """
     form = EditForm(formdata=request.form)
     if form.validate_on_submit():
-        newschool = School()
-        form.populate_obj(newschool)
-        db.session.add(newschool)
+        newexam = Exam()
+        form.populate_obj(newexam)
+        db.session.add(newexam)
         db.session.commit()
-        flash(f"'{ newschool.title}' created")
-        return redirect(_to.show(id=newschool.id))
+        flash(f"'{ newexam.title}' created")
+        return redirect(_to.show(id=newexam.id))
     else:
         flash("Error in form validation", "danger")
 
@@ -89,8 +93,8 @@ def show(id):
     Show page.
     :return: The response.
     """
-    school = db.get_or_404(School, id)
-    return render_template(_j.show, entity=school, **properties)
+    exam = db.get_or_404(Exam, id)
+    return render_template(_j.show, entity=exam, **properties)
 
 
 @bp.route("/<int:id>/edit", methods=["GET"])
@@ -99,8 +103,8 @@ def edit(id):
     Edit page.
     :return: The response.
     """
-    school = db.get_or_404(School, id)
-    userform = EditForm(formdata=request.form, obj=school)
+    exam = db.get_or_404(Exam, id)
+    userform = EditForm(formdata=request.form, obj=exam)
     return render_template(_j.edit, form=userform, **properties)
 
 
@@ -111,12 +115,12 @@ def update(id):
     Save Edited Entity
     :return: redirect to show entity
     """
-    school = db.get_or_404(School, id)
-    form = EditForm(formdata=request.form, obj=school)
+    exam = db.get_or_404(Exam, id)
+    form = EditForm(formdata=request.form, obj=exam)
     if form.validate_on_submit():
-        form.populate_obj(school)
+        form.populate_obj(exam)
         db.session.commit()
-        flash(f"'{ school.title}' updated")
+        flash(f"'{ exam.title}' updated")
         return redirect(_to.show(id=id))
     else:
         flash("Error in form validation", "danger")
@@ -128,8 +132,8 @@ def destroy(id):
     Delete Entity
     :return: redirect to list
     """
-    school = db.get_or_404(School, id)
-    db.session.delete(school)
+    exam = db.get_or_404(Exam, id)
+    db.session.delete(exam)
     db.session.commit()
-    flash(f"'{ school.title}' deleted")
+    flash(f"'{ exam.title}' deleted")
     return redirect(_to.index())

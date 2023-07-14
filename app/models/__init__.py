@@ -1,8 +1,8 @@
 from ..webapp import db
 from .user import User
-from .movie import Movie
-from .school import School
-from .linkage import Linkage
-from .solicitation import Solicitation
+from .question import Question
+from .exam import Exam
+from .exam_mounted import Exam_mounted
 
-__all__ = [User, Movie, School, Linkage, Solicitation]
+__all__ = [User, Question, Exam, Exam_mounted]
+
