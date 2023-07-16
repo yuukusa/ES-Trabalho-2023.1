@@ -5,22 +5,30 @@
 
 
 {% block header %}
-<h1>{% block title %}Show{% endblock %}</h1>
+<h1>{% block title %}Show {{ entity_name }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 
-<h2> Detalhes sobre:<i>{{entity.title}}</i> </h2>
+<h2> Detalhes sobre: <i>{{entity.title}}</i> </h2>
 <ul id="details">
     <li> Avaliação: {{entity.rating}}</li>
-    <li> Criado em: {{entity.release_date}}</li>
+    <li> Criado em: {{entity.created_at}}</li>
+    <li> Atualizado em: {{entity.updated_at}}</li>
 </ul>
 
 
 <h3> Descrição: </h3>
-<p> {{ entity.description }} </p>
-<h3> Solicitações: </h3>
-<p> {{ entity.exams }} </p>
+<p>{{ entity.title }}</p>
+<p> {{ entity.alternatives }} </p>
+<p>{% for i in entity.alternatives %}</p>
+<p></p>
+<p>{% endfor %}</p>
+<p> {{ entity.answer }} </p>
+
+<h3> Id do Exame: </h3>
+<p> {{ entity.id }} </p>
+
 
 <!--
 <div class="btn-group" role="group">
@@ -37,12 +45,12 @@
 -->
 
 <div class="btn-group" role="group">
-    <a href="{{ url_for('exams.index') }}" class="btn btn-primary">Voltar para a lista</a>
+    <a href="{{ url_for('questions.index') }}" class="btn btn-primary">Voltar para a lista</a>
     {% if current_user.is_authenticated %}
-    <a href="{{ url_for('exams.edit', id=entity.id) }}" class="btn btn-secondary">Editar    </a>
+    <a href="{{ url_for('questions.edit', id=entity.id) }}" class="btn btn-secondary">Editar    </a>
     <a href="#" class="clickForActionToConfirm btn btn-danger" entity-id="{{entity.id}}" data-bs-toggle="modal"
         data-bs-target="#modalConfirm" data-entity-reference="{{entity.title}}"
-        data-action="{{url_for('exams.destroy', id=entity.id)}}" data-action-text="Deletar">
+        data-action="{{url_for('questions.destroy', id=entity.id)}}" data-action-text="Deletar">
         {{render_icon('x-circle') }} Deletar
     </a>
     {% endif %}

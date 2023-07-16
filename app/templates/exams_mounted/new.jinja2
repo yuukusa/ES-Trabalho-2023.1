@@ -2,11 +2,11 @@
 {% from 'bootstrap5/form.html' import render_form %}
 
 {% block header %}
-<h1>{% block title %}{{ super() }}New {{ entity_name }}{% endblock %}</h1>
+<h1>{% block title %}New{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-{{ render_form(form, action=url_for('questions.create')) }}         {# This is the line that renders the form #}
+{{ render_form(form, action=url_for('exams_mounted.create')) }}         {# This is the line that renders the form #}
 {% endblock %}
 
 

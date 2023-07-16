@@ -1,5 +1,5 @@
 {% extends "base.jinja2" %}
-{% block title %}Index{% endblock %}
+{% block title %}{{ super() }}Index{% endblock %}
 {% block head %}
 {{ super() }}
 <style type="text/css">
@@ -10,17 +10,18 @@
 {% endblock %}
 {% block content %}
 
-<p class="important">
+<p class="important text-center">
+    <!--teste-->
 </p>   
+    
     <h1>
-        Seja Bem Vindo(a), {{ current_user.name }}!!!
-        <img src="{{ url_for('static', filename='img/Logo_UnB.png') }}" alt="UnB" width="40" height="25">
+        Seja Bem Vindo(a), {{ current_user.name }}!!!    
     </h1>
 
     <h2>
-        Esse é o marcaAí:
+        Esse é o SiPro:
         <p>
-        Sistema para realização de provas</p>
+        Sistema para Realização de Provas</p>
     </h2>
 
     {% if current_user.is_authenticated and not current_user.is_student %}
@@ -35,7 +36,7 @@
         </h4>
         
     <h4>
-        <a href="{#{ url_for('exams.new') }#}">Montar exame</a>
+        <a href="{{ url_for('exams_mounted.new') }}">Montar exame</a>
     </h4>
     <h4>
             
@@ -45,7 +46,7 @@
     {% endif %}
     {%if current_user.is_authenticated %}
     <h4>
-        <a href="{#{ url_for('exams.show') }#}">Provas disponíveis</a>
+        <a href="{{ url_for('exams_mounted.index') }}">Provas disponíveis</a>
     </h4>
     {%endif%}
     

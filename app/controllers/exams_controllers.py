@@ -48,9 +48,9 @@ def index():
 
 class EditForm(FlaskForm):
     title = StringField("title", validators=[InputRequired()])
-    comments = StringField("description")
-    qntityOfQuestions = IntegerField("quantity")
-    punctuation = IntegerField("punctuation")
+    comments = StringField("comments, description")
+    qntityOfQuestions = IntegerField("quantity of questions")
+    punctuation = IntegerField("overall punctuation")
     submit = SubmitField("Submit")
 
 class SearchForm(FlaskForm):
@@ -137,3 +137,5 @@ def destroy(id):
     db.session.commit()
     flash(f"'{ exam.title}' deleted")
     return redirect(_to.index())
+
+
