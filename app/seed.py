@@ -16,46 +16,46 @@ _d = parser.parse
 
 questions = [
     {
-        "title": "Qual a capital do Brasil?", "type_of": 1, "answer": "Brasília", "alternatives": '{"a":"Sao Paulo", "b": "Rio de Janeiro","c": "Brasilia", "d":"Belo Horizonte"}', "answer": 3, "comments": "Comentário sobre a questão"
+        "title": "Qual a capital do Brasil?", "type_of": 1, "answer": "Brasília", "json_alternatives": '{"a":"Sao Paulo", "b": "Rio de Janeiro","c": "Brasilia", "d":"Belo Horizonte"}', "answer": 3, "comments": "Comentário sobre a questão"
     },
              
     {
         "title":'Qual é a capital da França?',
-        "alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
+        "json_alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
         "answer":2
         },
     
     {
         "title":'Qual é a capital da Alemanha?',
-        "alternatives":'{"a": "Berlim", "b": "Paris", "c": "Roma"}',
+        "json_alternatives":'{"a": "Berlim", "b": "Paris", "c": "Roma"}',
         "answer":1
         },
 
     {   
         "title":'Qual é a capital da Itália?',
-        "alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
+        "json_alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
         "answer":3
         },
     {
         "title":'Qual é a capital da Espanha?',
-        "alternatives":'{"a": "Londres", "b": "Madrid", "c": "Roma"}',
+        "json_alternatives":'{"a": "Londres", "b": "Madrid", "c": "Roma"}',
         "answer":2
     },
     {
-        "title":'Qual o valor de x, sabendo que x+1 = 10?',
-        "alternatives": '{""}',
+        "title":'Responda a questão:',
+        "json_alternatives": 'Qual o valor de x, sabendo que x+1 = 10?',
         "answer": 9
     },
     {
-        "title":'Qual o valor de x, sabendo que x+2 = 10?',
-        "alternatives": '{""}',
+        "title":'Responda a questão:',
+        "json_alternatives": 'Qual o valor de x, sabendo que x+2 = 10?',
         "answer": 8
     },
     {
         "title":'Julgue as afirmações como verdadeiro (V) ou falso (F)',
-        "alternatives": '{"a": "A Terra é plana", "b": "A Terra é redonda", "c": "A Terra é quadrada", "d": "A Terra é cúbica", "e": "A Terra é triangular", "f": "A Terra é hexagonal, "g": "A Terra é pentagonal", "h": "A Terra é octogonal", "i": "A Terra é heptagonal", "j": "A Terra é esférica"}',
+        "json_alternatives": '{"a": "A Terra é plana", "b": "A Terra é redonda", "c": "A Terra é quadrada", "d": "A Terra é cúbica", "e": "A Terra é triangular", "f": "A Terra é hexagonal", "g": "A Terra é pentagonal", "h": "A Terra é octogonal", "i": "A Terra é heptagonal", "j": "A Terra é esférica"}',
         #"answer": '{"a": "F", "b": "V", "c": "F", "d": "F", "e": "F", "f": "F", "g": "F", "h": "F", "i": "F", "j": "V"}',
-        "answer": '{"a": 0, "b": 1, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0, "i": 0, "j": 1}',        
+        "answer": '{"a": 0, "b": 1, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0, "i": 0, "j": 1}'
     }
     ]
 

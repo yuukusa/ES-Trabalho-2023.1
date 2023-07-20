@@ -20,7 +20,7 @@ from ..webapp import db
 properties = {
     "entity_name": "question",
     "collection_name": "questions",
-    "list_fields": ["id","title", "type_of", "answer", "alternatives"],
+    "list_fields": ["id","title", "type_of", "answer", "json_alternatives"],
     
 }
 
@@ -61,27 +61,24 @@ def index():
 
 
 
-@bp.route("/json", methods=["GET"])
-def test():
+@bp.route("/<int:id>/json", methods=["GET"])
+def viewJson(id):
     # query alternatives and jsonify to send to frontend
-    alternatives =  [(question.alternatives) for question in Question.query.all()]
+    alternatives =  [(question.alternatives) for question in Question.query.filter_by(id=id).all()]
+    #alternatives =  [(question.alternatives) for question in Question.query.all()]
     print("query return type:", type(alternatives))
-         
-    print("len: ", len(alternatives))
-    print(f"\n\n:\n\n ")
+    print("query length: ", len(alternatives))
+    print(f"\n\n\n\n ")
         
     print(f"\n\nTestando json.loads:\n\n ")
-    print("ALL: \n", alternatives)
+    print("(query): \n", alternatives)
     print( "\n:END\n\n")
     
-    print("for loop: ")
-    for i in alternatives:
-        print(i)
-        print(type(i))
-    print(f"\n:fim for loop\n\n ")
-        
+    print("query \"elem[0]\" : ", alternatives[0])
+    print(type(alternatives[0]))
+    print(f"\n\n\n ")
     
-    alternatives = json.loads(alternatives[0])
+    #alternatives = json.loads(alternatives[0])
     #print(type(alternatives))
     #print(alternatives)
     jsnfy = (jsonify(alternatives))
@@ -92,21 +89,29 @@ def test():
     
     return jsnfy
 
-# class alternativesForm(FlaskForm):
-#     alternative = StringField("alternative", validators=[InputRequired()])
-#     answer = IntegerField("answer")
-    
+class AlternativesForm(FlaskForm):
+    alternative = StringField("alternative", validators=[InputRequired()])
+    answer = IntegerField("answer", validators=[InputRequired()])
+    nextfield = SubmitField("Next")
+
 class EditForm(FlaskForm):
     title = TextAreaField("Question Statement", validators=[InputRequired()])
-    comments = StringField("comments")
-    type_of = SelectField("type of Question", choices=[(1, "Múltipla escolha (a, b, c, d, ...)"), (2, "Verdadeiro ou falso (V ou F)"), (3, "Numérica")])
-    number_of_alternatives = IntegerField("number of alternatives")
-    #alternatives = FormField(alternativesForm)
-    alternatives = StringField("alternatives")
-    answer = IntegerField("answer")
-    
+    s1 = "1 - Múltipla escolha, 2 - Verdadeiro ou falso, 3 - Numérica"
+    type_of = SelectField("type of Question", choices=[(1, "Múltipla escolha (a, b, c, d, ...)"), (2, "Verdadeiro ou falso (V ou F)"), (3, "Numérica")], coerce=int, validators=[InputRequired()], description=s1, render_kw=dict(placeholder=s1))
+    qty_alternatives = IntegerField("number of alternatives", default=4, description="# of alternatives. default: 4", 
+                                    validators=[InputRequired()], render_kw=dict(placeholder="optional"))
+    s2 = "in json format, like: {\"a\": \"alternative1\", \"b\": \"alternative2\", \"c\": \"alternative3\", \"d\": \"alternative4\"}"
+    if type_of == 1:
+        json_alternatives = FormField(AlternativesForm, "alternatives: ", validators=[InputRequired()], description=s2, render_kw=dict(placeholder=s1))
+    else:
+        json_alternatives = StringField("alternatives: ", validators=[InputRequired()], description=s2, render_kw=dict(placeholder=s1))
+        s3 ="in json format, like: 1, 2, 3, 4, ... for multiple choice; 1 for true and 0 for false; literal number (#) for numeric answer"
+        s4 = "type the answer here"
+        answer = IntegerField("answer", validators=[InputRequired()], description=s3, render_kw=dict(placeholder=s4), default=None)
+        
+    comments = StringField("comments?", description="", render_kw=dict(placeholder="optional"))
     submit = SubmitField("Submit")
-    #nextfield = SubmitField("Next")
+    
     
 
 
@@ -144,10 +149,19 @@ def show(id):
     Show page.
     :return: The response.
     """
-    alternative =  [(question.alternatives) for question in Question.query.filter_by(id=id).all()]
+    alternatives_query =  [(question.json_alternatives) for question in Question.query.filter_by(id=id).all()]
+    print("query return type:", type(alternatives_query))
+    print("query length: ", len(alternatives_query))
+    print(f"query: {alternatives_query} \n\n\n\n ")
+    json_alternatives = str(alternatives_query[0])
+    alternatives = json.loads(json_alternatives)
+    list1 = []
+    # for i in alternatives:
+    #     list1 += [(i, alternatives[i])]
     
+    print(f"tuples: {list1} \n\n\n\n ")
     question = db.get_or_404(Question, id)
-    return render_template(_j.show, entity=question, **properties)
+    return render_template(_j.show, entity=question, alternatives=alternatives, **properties)
 
 
 
@@ -158,6 +172,7 @@ def edit(id):
     Edit page.
     :return: The response.
     """
+    print("edit")
     question = db.get_or_404(Question, id)
     userform = EditForm(formdata=request.form, obj=question)
     return render_template(_j.edit, form=userform, **properties)
@@ -170,6 +185,7 @@ def update(id):
     Save Edited Entity
     :return: redirect to show entity
     """
+    print("update")
     question = db.get_or_404(Question, id)
     form = EditForm(formdata=request.form, obj=question)
     # for _ in range(form.number_of_alternatives.data):
@@ -194,3 +210,4 @@ def destroy(id):
     db.session.commit()
     flash(f"'{ question.title}' deleted")
     return redirect(_to.index())
+

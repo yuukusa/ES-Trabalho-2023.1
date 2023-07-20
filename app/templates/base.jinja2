@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {{ render_nav_item('main.index', 'Home') }}
-                    {{ render_nav_item('exams_mounted.index', 'Perform Exams') }}
+                    {#{ render_nav_item('exams_mounted.index', 'Perform Exams') }#}
 
                     {% if current_user.is_student==False %} <!--{#admin#}-->
                     {{ render_nav_item('exams.index', 'Exams') }}

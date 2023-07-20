@@ -12,97 +12,39 @@
 
 <h2> Detalhes sobre: <i>{{entity.title}}</i> </h2>
 <ul id="details">
-    <li> Id do Exame: {{ entity.id }}</li>
     <li> Avaliação: {{entity.rating}}</li>
     <li> Criado em: {{entity.created_at}}</li>
     <li> Atualizado em: {{entity.updated_at}}</li>
 </ul>
 
 
-<h2> Descrição: </h2>
-<h4>Enunciado: </h4>
+<h3> Descrição: </h3>
 <p>{{ entity.title }}</p>
-<h4>Alternativas (json): </h4>
-<p>{{ entity.json_alternatives }} </p>
 
-<h4>Alternativas (dict):</h4>
-<p>
-    {% for key, value in alternatives|dictsort(true) %}
-    <ol>
-        ( {{ key }} ) {{ value }}
-    </ol>
-    {% endfor %}
-</p>
-
-
-
-
-<h4>Respostas: </h4>
-{% if entity.type_of == 1 %}
-
-<p> Item correto:
-</p>
-<p>
-    {{ entity.answer }}ª alternativa: 
-    {% for i in alternatives %}
-    {% if loop.index == entity.answer %}
-    <b>{{ alternatives[i] }}</b>
-    {% endif %}
-    {% endfor %}
-</p>
-{% endif %}
-
-{% if entity.type_of == 2 %}
-<p> 
-    {% for i in alternatives %}
-    {% if 0 == entity.answer %}
-    <b>Falso</b>
-    {% elif 1 == entity.answer %}
-    <b>Verdadeiro</b>
-    {% else %}
-    <b>Erro</b>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-</p>
-
-
-
-
-<h3><p></p>...</h3>
-<h3><p></p>Mais... : </h3>
-
-<h5>Alternativas (dict):</h5>
-<dl>
-    {% for key, value in alternatives|items %}
-        <dt>{{ key }}
-        <dd>{{ value }}
-    {% endfor %}
-    </dl>
-
+<p>alternativas (json): {{ entity.json_alternatives }} </p>
+<p>alternativas(dict):</p>
 <p>{% for i in alternatives %}</p>
-<p>{{ i, alternatives[i]  }}</p>
+<p>{{ i }}</p>
 <p>{% endfor %}</p>
+<p> {{ entity.answer }} </p>
 
-<h6>Another counter:</h6>
-<p>
-    {% for number in range(1, (alternatives|count)+1) %}
-    <li class="answer"><span>...{{number}}</span></li>
-    {% if number == entity.answer %}
-    <li class="answer"><span>answer...{{entity.answer}}</span></li>
-    <li>number: {{number}}</li>
-    {% endif %} 
-    {% endfor %}
-</p>
-    
-    
+<h3> Id do Exame: </h3>
+<p> {{ entity.id }} </p>
 
 
-
-
-
-
-
+<!--
+<div class="btn-group" role="group">
+    <a href="{{ url_for('exams.index') }}" class="btn btn-primary">Back to List</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('exams.edit', id=entity.id) }}" class="btn btn-secondary">Edit</a>
+    <a href="#" class="clickForActionToConfirm btn btn-danger" entity-id="{{entity.id}}" data-bs-toggle="modal"
+        data-bs-target="#modalConfirm" data-entity-reference="{{entity.title}}"
+        data-action="{{url_for('exams.destroy', id=entity.id)}}" data-action-text="delete">
+        {{render_icon('x-circle') }} Delete
+    </a>
+    {% endif %}
+</div>
+-->
 
 <div class="btn-group" role="group">
     <a href="{{ url_for('questions.index') }}" class="btn btn-primary">Voltar para a lista</a>

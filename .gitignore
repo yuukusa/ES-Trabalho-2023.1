@@ -164,5 +164,5 @@ cython_debug/
 #.idea/
 
 app/data.sqlite
-app/controllers/JSON tests.py
 data.sqlite
+app/JSONtests.py
