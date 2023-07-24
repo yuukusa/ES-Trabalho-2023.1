@@ -74,13 +74,15 @@ def register():
             email = form.email.data
             pwd = form.pwd.data
             username = form.username.data
+            is_student = form.is_student.data
 
             newuser = User(
                 username=username,
                 email=email,
                 pwd=bcrypt.generate_password_hash(pwd),
-            )
-
+                is_student = is_student
+            )         
+            
             db.session.add(newuser)
             db.session.commit()
             flash(f"Account Succesfully created", "success")

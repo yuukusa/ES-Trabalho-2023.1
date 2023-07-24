@@ -1,5 +1,5 @@
-from wtforms import StringField, PasswordField, SubmitField
-
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+import wtforms
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp, Optional
 
@@ -38,6 +38,7 @@ class register_form(FlaskForm):
             EqualTo("pwd", message="Passwords must match !"),
         ]
     )
+    is_student = BooleanField("É estudante?")
     submit_button = SubmitField("Register")
 
     def validate_email(self, email):

@@ -10,18 +10,16 @@ class Exam_mounted(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.Integer, db.ForeignKey("user.id"))
-    title = db.Column(db.String)
-    
+    title = db.Column(db.String)    
     exam_id = db.Column(db.Integer, db.ForeignKey('exam.id'))
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))    
+    question_worth = db.Column(db.Integer)    
     
-    question_worth = db.Column(db.Integer)
-    
-    comments = db.Column(db.String)
-    
-    
+    comments = db.Column(db.String)      
+      
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
+    
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(
         db.DateTime, nullable=False, default=func.now(), onupdate=func.now()

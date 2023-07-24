@@ -20,7 +20,7 @@
                 <h1>Manage {{collection_name}}</h1>
             </div>
             <div class="col-sm-6">
-                {% if current_user.is_authenticated %}
+                {% if current_user.is_student == False %}
                 <a href="{{ url_for('exams_mounted.new') }}" class="btn btn-success">
                     {{render_icon('file-plus') }} <span>Create</span></a>
                 {% endif %}
@@ -28,12 +28,13 @@
         </div>
     </div>
 	
-	{% if current_user.is_student==False %}
-		<h3>Mount the exam</h3>
+	{% if current_user.is_authenticated%}
+		<h3>Mount the exam </h3>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
                 {% for field in list_fields %}
+                
                 <th>{{ field }}</th>
                 {% endfor %}
                 <th>Options</th>
@@ -45,32 +46,40 @@
             {% for entity in entities %}
             <tr>
                 {% for field in list_fields %}
-                
+
                 <td>{{ entity[field] }}</td>
                 
                 {% endfor %}
-                <td>
+                <td>                   
+                 {% if current_user.is_authenticated %}
+                    {% if current_user.is_student==True %}
                     <a class="btn" href="{{ url_for('exams_mounted.show', id=entity.id) }}" title="View"> {{
                         render_icon('search') }} </a>
-                    {% if current_user.is_authenticated %}
+                    {%endif%}
+                    {%endif%}
+                {% if current_user.is_authenticated %}
+                    {% if current_user.is_student==False %}
+                    <a class="btn" href="{{ url_for('exams_mounted.show', id=entity.id) }}" title="View"> {{
+                        render_icon('search') }} </a>
+               
                     <span> </span>
-			{% if current_user.is_student==False %}
+			       
                     <a class="btn" href="{{ url_for('exams_mounted.edit', id=entity.id) }}" title="Edit"> {{
-                        render_icon('pencil-square') }}</a>
-			{% endif %}
+                        render_icon('pencil-square') }}</a>			       
                     <span> </span>
                     <a href="#" class="btn clickForActionToConfirm" entity-id="{{entity.id}}" data-bs-toggle="modal"
                         data-bs-target="#modalConfirm" data-entity-reference="{{entity.title}}"
                         data-action="{{url_for('exams_mounted.destroy', id=entity.id)}}" data-action-text="delete" title="delete">
                         {{render_icon('x-circle') }}
-                    </a>
                     {% endif %}
+                    </a>
+                {% endif %}
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-                {% endif %}
+            {% endif %}
 </div>
 {{ confirmModalMacro() }}
 {% endblock %}
