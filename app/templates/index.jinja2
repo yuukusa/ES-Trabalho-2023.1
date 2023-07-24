@@ -1,5 +1,5 @@
 {% extends "base.jinja2" %}
-{% block title %}Index{% endblock %}
+{% block title %}{{ super() }}Index{% endblock %}
 {% block head %}
 {{ super() }}
 <style type="text/css">
@@ -9,43 +9,44 @@
 </style>
 {% endblock %}
 {% block content %}
-<h1>Index</h1>
-<p class="important">
+
+<p class="important text-center">
+    <!--teste-->
 </p>   
+    
     <h1>
-        Seja Bem Vindo!!!
-        <img src="{{ url_for('static', filename='img/Logo_UnB.png') }}" alt="UnB" width="40" height="25">
+        Seja Bem Vindo(a), {{ current_user.username}}!!!    
     </h1>
 
     <h2>
-        Esse é o marcaAí:
+        Esse é o SiPro:
         <p>
-        Um Sistema para realização de provas</p>
+        Sistema para Realização de Provas</p>
     </h2>
 
-    {% if not current_user.is_student %}
+    {% if current_user.is_authenticated and not current_user.is_student %}
 
   <p>
-    essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
+    *essa parte deve ser alterada para que o usuário possa ver os exames que ele está vinculado
             e outras funcionalidades
         </p>
 
         <h4>
-            <a href="{{ url_for('schools.new') }}">Registrar Exame</a>
+            <a href="{{ url_for('exams.new') }}">Registrar Exame</a>
         </h4>
         
     <h4>
-        <a href="{{ url_for('linkages.new') }}">Gravar vínculo</a>
+        <a href="{{ url_for('exams_mounted.new') }}">Montar exame</a>
     </h4>
     <h4>
             
         
-        <a href="{{ url_for('solicitations.new') }}">Aplique para uma escola de seu interesse</a>
+        <a href="{{ url_for('questions.new') }}">Adicionar questões</a>
     </h4>
     {% endif %}
-    {%if not current_user.is_authenticated %}
+    {%if current_user.is_authenticated %}
     <h4>
-        <a href="{{ url_for('schools.index') }}">Escolas</a>
+        <a href="{{ url_for('exams_mounted.index') }}">Provas disponíveis</a>
     </h4>
     {%endif%}
     
@@ -55,5 +56,4 @@
     {{ super() }}
     <!-- The contents of myscript.js will be loaded inside the script tag -->
     
-    {% endblock %}         
-    
+    {% endblock %}

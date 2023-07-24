@@ -1,0 +1,59 @@
+{% extends 'base.jinja2' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+{% from 'macros/component_confirm_modal.jinja2' import confirmModalMacro, confirmModalScript %}
+
+
+{% block header %}
+<h1>{% block title %}{{ super() }}Show{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2> Detalhes sobre: <i>{{entity.title}}</i> </h2>
+<ul id="details">
+    <li> Avaliação: {{entity.rating}}</li>
+    <li> Criado em: {{entity.created_at}}</li>
+    <li> Atualizado em: {{entity.updated_at}}</li>
+</ul>
+
+
+<h3> Descrição: </h3>
+<p> {{ entity.description }} </p>
+<h3> Mais... : </h3>
+<p> {{ entity.exams_mounted }} </p>
+
+<!--
+<div class="btn-group" role="group">
+    <a href="{{ url_for('exams_mounted.index') }}" class="btn btn-primary">Back to List</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('exams_mounted.edit', id=entity.id) }}" class="btn btn-secondary">Edit</a>
+    <a href="#" class="clickForActionToConfirm btn btn-danger" entity-id="{{entity.id}}" data-bs-toggle="modal"
+        data-bs-target="#modalConfirm" data-entity-reference="{{entity.title}}"
+        data-action="{{url_for('exams_mounted.destroy', id=entity.id)}}" data-action-text="delete">
+        {{render_icon('x-circle') }} Delete
+    </a>
+    {% endif %}
+</div>
+-->
+
+<div class="btn-group" role="group">
+    <a href="{{ url_for('exams_mounted.index') }}" class="btn btn-primary">Voltar para a lista</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('exams_mounted.edit', id=entity.id) }}" class="btn btn-secondary">Editar    </a>
+    <a href="#" class="clickForActionToConfirm btn btn-danger" entity-id="{{entity.id}}" data-bs-toggle="modal"
+        data-bs-target="#modalConfirm" data-entity-reference="{{entity.title}}"
+        data-action="{{url_for('exams_mounted.destroy', id=entity.id)}}" data-action-text="Deletar">
+        {{render_icon('x-circle') }} Deletar
+    </a>
+    {% endif %}
+</div>
+
+{{ confirmModalMacro() }}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<!-- The contents of myscript.js will be loaded inside the script tag -->
+{{ confirmModalScript() }}
+{% endblock %}

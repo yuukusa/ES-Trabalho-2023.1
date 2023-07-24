@@ -1,0 +1,9 @@
+                {#% if field == 'ended' %}
+                        {% if entity[field] == 1  %}
+                            <td>finalizado</td>
+                        {% elif entity[field] == 2 %}
+                            <td>não finalizado</td>
+                        {% else %}
+                            <td>outros</td>
+                        {% endif %}
+                {% else %#}

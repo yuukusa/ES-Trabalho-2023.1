@@ -5,81 +5,88 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+# type_of: 1 - Múltipla escolha, 2 - Verdadeiro ou falso, 3 - Numérica
+
 
 from dateutil import parser
 
 _d = parser.parse
 
-pwd_hash = "$2b$12$QLpUyPzW8PF6Kidk/fMXM.AQQSCI7UK7OsUr4k.2qVAbPq7yPdrhy"
-users = [
-    # {"username": "admin", "email": "1@d.m", "pwd": pwd_hash},
-    # {"username": "admin2", "email": "2@d.m", "pwd": pwd_hash},
-    {"username": "ana", "email": "ana@d.m", "pwd": pwd_hash},
-    {"username": "bob", "email": "bob@d.m", "pwd": pwd_hash},
-    {"username": "carol", "email": "carol@d.m", "pwd": pwd_hash},
-    {"username": "pedro", "email":" pedro@unb.br", "pwd": "asdfg", "is_student": False},
-    {"username": "ester", "email": "ester@unb.br", "pwd": "asdfg", "is_student": True},
-    
-    
-]
 
-exams = [
-    {'quantity': 2, 'punctuation': 10},
-     
-]
-
-
-
-
-
-
-
-
-
-
-
-
-
-movies = [
-    {"title": "Aladdin", "rating": "G", "release_date": _d("25-Nov-1992")},
-    {"title": "The Terminator", "rating": "R", "release_date": _d("26-Oct-1984")},
-    {"title": "When Harry Met Sally", "rating": "R", "release_date": _d("21-Jul-1989")},
-    {"title": "The Help", "rating": "PG-13", "release_date": _d("10-Aug-2011")},
-    {"title": "Chocolat", "rating": "PG-13", "release_date": _d("5-Jan-2001")},
-    {"title": "Amelie", "rating": "R", "release_date": _d("25-Apr-2001")},
-    {"title": "2001: A Space Odyssey", "rating": "G", "release_date": _d("6-Apr-1968")},
-    {"title": "The Incredibles", "rating": "PG", "release_date": _d("5-Nov-2004")},
+questions = [
     {
-        "title": "Raiders of the Lost Ark",
-        "rating": "PG",
-        "release_date": _d("12-Jun-1981"),
+        "title": "Qual a capital do Brasil?", "type_of": 1, "answer": "Brasília", "json_alternatives": '{"a":"Sao Paulo", "b": "Rio de Janeiro","c": "Brasilia", "d":"Belo Horizonte"}', "answer": 3, "comments": "Comentário sobre a questão"
     },
-    {"title": "Chicken Run", "rating": "G", "release_date": _d("21-Jun-2000")},
-    {"title": "O Vingador", "rating": "NAO SEI", "release_date": _d("17-Apr-2019")},
+             
+    {
+        "title":'Qual é a capital da França?',
+        "json_alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
+        "answer":2
+        },
     
-]
+    {
+        "title":'Qual é a capital da Alemanha?',
+        "json_alternatives":'{"a": "Berlim", "b": "Paris", "c": "Roma"}',
+        "answer":1
+        },
 
-
-schools = [
+    {   
+        "title":'Qual é a capital da Itália?',
+        "json_alternatives":'{"a": "Londres", "b": "Paris", "c": "Roma"}',
+        "answer":3
+        },
     {
-        "title": "CEF 5 Brasília", "release_date": _d("23-May-2023") 
+        "title":'Qual é a capital da Espanha?',
+        "json_alternatives":'{"a": "Londres", "b": "Madrid", "c": "Roma"}',
+        "answer":2
     },
-    
     {
-        "title": "CEM Setor Leste", "release_date": _d("25-May-2023") 
+        "title":'Responda a questão:',
+        "json_alternatives": 'Qual o valor de x, sabendo que x+1 = 10?',
+        "answer": 9
     },
-    
     {
-        "title": "CEM Setor Oeste", "release_date": _d("25-May-2023")
+        "title":'Responda a questão:',
+        "json_alternatives": 'Qual o valor de x, sabendo que x+2 = 10?',
+        "answer": 8
+    },
+    {
+        "title":'Julgue as afirmações como verdadeiro (V) ou falso (F)',
+        "json_alternatives": '{"a": "A Terra é plana", "b": "A Terra é redonda", "c": "A Terra é quadrada", "d": "A Terra é cúbica", "e": "A Terra é triangular", "f": "A Terra é hexagonal", "g": "A Terra é pentagonal", "h": "A Terra é octogonal", "i": "A Terra é heptagonal", "j": "A Terra é esférica"}',
+        #"answer": '{"a": "F", "b": "V", "c": "F", "d": "F", "e": "F", "f": "F", "g": "F", "h": "F", "i": "F", "j": "V"}',
+        "answer": '{"a": 0, "b": 1, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0, "i": 0, "j": 1}'
     }
     ]
 
-linkages = [
-    
-    { 'title': 'test', 'school_id': 1, 'student_id':1, 'presence': True},
-    
-    { 'title': 'test', 'school_id': 2, 'student_id':2, 'presence': True},
+
+exams = [
+    {
+        "title": "Prova de Geografia", "qntityOfQuestions": 3, "punctuation": 10,  "comments": "Múltipla escolha: Marque a alternativa correta"},
+    {
+        "title": "Prova de Matemática", "qntityOfQuestions": 3, "punctuation": 10,  "comments": "Respostas em inteiros"},
+    {
+        "title": "Prova de História", "qntityOfQuestions": 3, "punctuation": 10,  "comments": "Verdadeiro ou falso: Marque V ou F"}
     
     ]
 
-solicitations = []
+
+
+pwd_hash =  "$2b$12$QLpUyPzW8PF6Kidk/fMXM.AQQSCI7UK7OsUr4k.2qVAbPq7yPdrhy"   # bcrypt.generate_password_hash("asdasdasd")
+pwd_hash3 = "$2b$12$DNf./WDisJfVGbw2TFlageeyvdYUES4B.H2SBLEdjjyfBk9cx8xqa"   # bcrypt.generate_password_hash("asdfg")
+
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt()
+pwd_hash2 = bcrypt.generate_password_hash("asdfg")
+
+users = [
+    # {"username": "admin", "email": "1@d.m", "pwd": pwd_hash},
+    # {"username": "admin2", "email": "2@d.m", "pwd": pwd_hash},
+    
+    {"name": "Ester", "username": "ester", "email": "ester@unb.br", "pwd": pwd_hash2, "is_student": True},
+    {"name": "Pedro", "username": "pedro", "email": "pedro@unb.br", "pwd": pwd_hash2, "is_student": False},
+    
+    ]
+
+
+
