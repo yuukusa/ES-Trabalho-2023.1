@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from wtforms import StringField, SubmitField, SelectField, IntegerField, BooleanField, RadioField, TextAreaField, HiddenField, SelectMultipleField, fields, FileField, datetime, DateTimeField, DateField, TimeField 
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired
+from datetime import datetime
 
 from ..models import Exam, Question, User, Exam_mounted
 
@@ -14,7 +15,7 @@ from ..webapp import db
 properties = {
     "entity_name": "exam_mounted",
     "collection_name": "exams_mounted",
-    "list_fields": ["id","title", "exam_id", "question_id", "question_worth", "comments", "start_date", "end_date"]
+    "list_fields": ["id","title", "exam_id", "question_id", "question_worth", "Is it open?", "start_date", "end_date"]
 }
 
 
@@ -47,19 +48,34 @@ def index():
     return render_template(_j.index, entities=exams_mounted, **properties)
 
 
+    
 class EditForm(FlaskForm):
     title = StringField("title", validators=[InputRequired()])
     exam_id = SelectField("exam", choices=[], coerce = int)
     question_id = SelectField("question", choices=[], coerce = int)
-    question_worth = IntegerField("question_worth")
+    question_worth = IntegerField("question_worth")    
     
-    start_date = DateField("start_date")
-    end_date = DateField("end_date")
-    
-    comments = StringField("comments / description")
+    start_date = DateTimeField("start_date")
+    end_date = DateTimeField("end_date")            
+
+    comments = StringField("Is it Open?")
     
     submit = SubmitField("Submit")
-
+    
+# @bp.route("/", methods=["GET", "POST"])
+# def check_hours():
+#     form = EditForm()
+    
+#     end_date = form.end_date.data
+#     current_time = datetime.now()
+    
+#     if current_time > end_date:
+#         comments = "Already Closed!"
+#     else:
+#         comments ="It's open!"
+        
+#     return render_template(_j.show, entity=exams_mounted, **properties)
+    
 class SearchForm(FlaskForm):
     title = StringField("title", validators=[InputRequired()])
     submit = SubmitField("Submit")

@@ -44,7 +44,7 @@ Ref. https://flask-migrate.readthedocs.io/en/latest/
 `poetry` 
 
 ## clone repo
-`git clone https://github.com/seunb/rottenpotatoes`
+`git clone https://github.com/yuukusa/ES-Trabalho-2023.1`
 
 ## power shell
 `poetry install` 
@@ -53,5 +53,6 @@ Ref. https://flask-migrate.readthedocs.io/en/latest/
 ## inside enfiroment
 `$env:FLASK_APP = "app.webapp"`
 `flask db upgrade`
-`flask seed movies`
+`flask seed exams`
+`flask seed questions`
 `flask seed users`

@@ -62,11 +62,11 @@ questions = [
 
 exams = [
     {
-        "title": "Prova de Geografia", "quantity": 3, "punctuation": 10,  "comments": "Múltipla escolha: Marque a alternativa correta"},
+        "title": "Prova de Geografia", "qntityOfQuestions": 3, "punctuation": 10,  "comments": "Múltipla escolha: Marque a alternativa correta"},
     {
-        "title": "Prova de Matemática", "quantity": 3, "punctuation": 10,  "comments": "Respostas em inteiros"},
+        "title": "Prova de Matemática", "qntityOfQuestions": 3, "punctuation": 10,  "comments": "Respostas em inteiros"},
     {
-        "title": "Prova de História", "quantity": 3, "punctuation": 10,  "comments": "Verdadeiro ou falso: Marque V ou F"}
+        "title": "Prova de História", "qntityOfQuestions": 3, "punctuation": 10,  "comments": "Verdadeiro ou falso: Marque V ou F"}
     
     ]
 

@@ -20,7 +20,7 @@
                 <h1>Manage {{collection_name}}</h1>
             </div>
             <div class="col-sm-6">
-                {% if current_user.is_authenticated %}
+                {% if current_user.is_student == False %}
                 <a href="{{ url_for('exams_mounted.new') }}" class="btn btn-success">
                     {{render_icon('file-plus') }} <span>Create</span></a>
                 {% endif %}
