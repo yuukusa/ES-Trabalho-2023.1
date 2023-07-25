@@ -86,10 +86,6 @@ users = [
     {"name": "Ester", "username": "ester", "email": "ester@unb.br", "pwd": pwd_hash2, "is_student": True},
     {"name": "Pedro", "username": "pedro", "email": "pedro@unb.br", "pwd": pwd_hash2, "is_student": False},
     
-    # {"username": "ana", "email": "3@d.m", "pwd": pwd_hash},
-    # {"username": "bob", "email": "4@d.m", "pwd": pwd_hash},
-    # {"username": "carol", "email": "5@d.m", "pwd": pwd_hash},
-    
     ]
 
 

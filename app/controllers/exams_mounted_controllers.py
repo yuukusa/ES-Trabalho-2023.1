@@ -80,9 +80,6 @@ class SearchForm(FlaskForm):
     title = StringField("title", validators=[InputRequired()])
     submit = SubmitField("Submit")
 
-
-
-
 @bp.route("/new", methods=["GET"])
 def new():
     """
