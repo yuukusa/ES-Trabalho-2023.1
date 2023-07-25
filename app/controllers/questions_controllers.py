@@ -64,7 +64,7 @@ def index():
 @bp.route("/<int:id>/json", methods=["GET"])
 def viewJson(id):
     # query alternatives and jsonify to send to frontend
-    alternatives =  [(question.alternatives) for question in Question.query.filter_by(id=id).all()]
+    alternatives =  [(question.json_alternatives) for question in Question.query.filter_by(id=id).all()]
     #alternatives =  [(question.alternatives) for question in Question.query.all()]
     print("query return type:", type(alternatives))
     print("query length: ", len(alternatives))
